@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login — Innovative Petrochemicals</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --bg-primary: hsl(220, 25%, 7%);
+            --bg-secondary: hsl(220, 20%, 12%);
+            --bg-card: hsl(220, 18%, 15%);
+            --accent-teal: hsl(174, 100%, 43%);
+            --accent-teal-glow: hsla(174, 100%, 43%, 0.15);
+            --accent-green: hsl(145, 75%, 45%);
+            --text-primary: hsl(220, 20%, 96%);
+            --text-secondary: hsl(220, 12%, 72%);
+            --text-muted: hsl(220, 10%, 50%);
+            --border-color: hsl(220, 15%, 22%);
+            --border-hover: hsl(220, 15%, 32%);
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-teal); }
+
+        /* ========== LEFT PANEL ========== */
+        .left-panel {
+            width: 45%;
+            background: linear-gradient(135deg, hsl(220, 30%, 9%) 0%, hsl(190, 40%, 10%) 50%, hsl(174, 30%, 9%) 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            top: -150px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, hsla(174, 100%, 43%, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .left-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            right: -80px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, hsla(145, 75%, 45%, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .login-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: -0.03em;
+            margin-bottom: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: hsl(220, 30%, 9%);
+            border-radius: 50%;
+        }
+
+        .logo span { color: var(--accent-teal); }
+
+        .left-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .left-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+            background: var(--accent-teal-glow);
+            border: 1px solid hsla(174, 100%, 43%, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            width: fit-content;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .left-content h1 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.25rem;
+        }
+
+        .left-content h1 .grad {
+            background: linear-gradient(135deg, var(--accent-teal), hsl(145, 75%, 50%));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .left-content > p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            max-width: 380px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: var(--transition-fast);
+        }
+
+        .feature-item:hover {
+            border-color: hsla(174, 100%, 43%, 0.3);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--accent-teal-glow);
+            border: 1px solid hsla(174, 100%, 43%, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-teal);
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.15rem;
+        }
+
+        .feature-text p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .left-footer {
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .left-footer a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+
+        .left-footer a:hover { color: var(--accent-teal); }
+        .left-footer a i { font-size: 0.8rem; transition: var(--transition-fast); }
+        .left-footer a:hover i { transform: translateX(-3px); }
+
+        /* ========== RIGHT PANEL ========== */
+        .right-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .right-panel::before {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, hsla(174, 100%, 43%, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-card-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .login-card-header h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-card-header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            pointer-events: none;
+            transition: var(--transition-fast);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem 1rem 0.875rem 2.75rem;
+            background: var(--bg-secondary);
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-teal);
+            background: hsl(220, 20%, 14%);
+            box-shadow: 0 0 0 3px var(--accent-teal-glow);
+        }
+
+        .form-group input:focus + .input-icon,
+        .input-wrapper:focus-within .input-icon {
+            color: var(--accent-teal);
+        }
+
+        .form-group input::placeholder { color: var(--text-muted); }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.25rem;
+            font-size: 0.85rem;
+            transition: var(--transition-fast);
+        }
+
+        .password-toggle:hover { color: var(--accent-teal); }
+
+        .form-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.25rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent-teal);
+            cursor: pointer;
+        }
+
+        .remember-me span {
+            font-size: 0.83rem;
+            color: var(--text-secondary);
+        }
+
+        .forgot-link {
+            font-size: 0.83rem;
+            color: var(--accent-teal);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .forgot-link:hover { opacity: 0.75; text-decoration: underline; }
+
+        /* Error Message */
+        .error-msg {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: hsla(0, 80%, 55%, 0.1);
+            border: 1px solid hsla(0, 80%, 55%, 0.3);
+            border-radius: 8px;
+            color: hsl(0, 80%, 70%);
+            font-size: 0.85rem;
+            animation: shake 0.4s ease;
+        }
+
+        .error-msg.visible { display: flex; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-6px); }
+            40% { transform: translateX(6px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        /* Login Submit Button */
+        .btn-login-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-teal), hsl(185, 100%, 40%));
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 10px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            transition: var(--transition-smooth);
+            letter-spacing: 0.02em;
+            box-shadow: 0 4px 20px var(--accent-teal-glow);
+            margin-top: 0.5rem;
+        }
+
+        .btn-login-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px hsla(174, 100%, 43%, 0.35);
+        }
+
+        .btn-login-submit:active { transform: translateY(0); }
+
+        .btn-login-submit.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .btn-login-submit .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(0,0,0,0.3);
+            border-top-color: var(--bg-primary);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: none;
+        }
+
+        .btn-login-submit.loading .spinner { display: block; }
+        .btn-login-submit.loading .btn-text { display: none; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin: 0.5rem 0;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .credentials-hint {
+            padding: 1rem 1.25rem;
+            background: var(--accent-teal-glow);
+            border: 1px solid hsla(174, 100%, 43%, 0.2);
+            border-radius: 10px;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .credentials-hint strong { color: var(--accent-teal); font-family: var(--font-heading); }
+
+        /* Fade-in animation */
+        .login-card { animation: fadeInUp 0.6s ease both; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            body { flex-direction: column; overflow: auto; }
+
+            .left-panel {
+                width: 100%;
+                padding: 2rem;
+                min-height: auto;
+            }
+
+            .left-content { margin: 2rem 0; }
+            .left-content h1 { font-size: 2rem; }
+            .feature-list { display: none; }
+
+            .right-panel {
+                padding: 2rem;
+                align-items: flex-start;
+            }
+
+            .login-card { max-width: 100%; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Left Branding Panel -->
+    <div class="left-panel">
+        <a href="index.html" class="login-logo">
+            <div class="logo-icon"></div>
+            INNOVATIVE<span>&nbsp;PETROCHEMICALS</span>
+        </a>
+
+        <div class="left-content">
+            <div class="left-badge">
+                <i class="fa-solid fa-shield-halved"></i>
+                Secure Admin Portal
+            </div>
+            <h1>Take full <span class="grad">control</span> of your website</h1>
+            <p>Log in to the Innovative Petrochemicals admin dashboard to manage products, industries, customer inquiries, and site settings — all from one place.</p>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-inbox"></i></div>
+                    <div class="feature-text">
+                        <h4>Manage Inquiries</h4>
+                        <p>View & respond to customer queries</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                    <div class="feature-text">
+                        <h4>Products Manager</h4>
+                        <p>Add, edit, or delete product listings</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-industry"></i></div>
+                    <div class="feature-text">
+                        <h4>Industries Manager</h4>
+                        <p>Control the industries we serve section</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <div class="feature-text">
+                        <h4>Site Settings</h4>
+                        <p>Update hero content & contact details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="left-footer">
+            <a href="index.html">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Main Website
+            </a>
+        </div>
+    </div>
+
+    <!-- Right Login Panel -->
+    <div class="right-panel">
+        <div class="login-card">
+            <div class="login-card-header">
+                <h2>Welcome back 👋</h2>
+                <p>Sign in to access the admin dashboard</p>
+            </div>
+
+            <form class="login-form" id="login-form" autocomplete="off">
+
+                <div class="error-msg" id="error-msg">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span id="error-text">Invalid username or password.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="username" placeholder="Enter your username" required autocomplete="username">
+                        <i class="fa-solid fa-user input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <button type="button" class="password-toggle" id="toggle-password" aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye" id="eye-icon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <span>Keep me signed in</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-login-submit" id="login-btn">
+                    <span class="btn-text">Sign In <i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+                    <div class="spinner"></div>
+                </button>
+
+                <div class="divider">Default Credentials</div>
+
+                <div class="credentials-hint">
+                    <strong>Username:</strong> admin &nbsp;|&nbsp; <strong>Password:</strong> admin123<br>
+                    <span style="font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem;display:block;">For production use, update credentials in admin panel settings.</span>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ======= Admin Login Logic =======
+        const CREDENTIALS = { username: 'admin', password: 'admin123' };
+        const SESSION_KEY = 'innovative_admin_session';
+
+        const loginForm = document.getElementById('login-form');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorMsg = document.getElementById('error-msg');
+        const errorText = document.getElementById('error-text');
+        const loginBtn = document.getElementById('login-btn');
+        const togglePassword = document.getElementById('toggle-password');
+        const eyeIcon = document.getElementById('eye-icon');
+
+        // Redirect if already logged in
+        if (sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(SESSION_KEY)) {
+            window.location.href = 'admin.html';
+        }
+
+        // Password visibility toggle
+        togglePassword.addEventListener('click', () => {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            eyeIcon.className = isPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+        });
+
+        // Form submit
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            errorMsg.classList.remove('visible');
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+
+            // Loading state
+            loginBtn.classList.add('loading');
+
+            setTimeout(() => {
+                loginBtn.classList.remove('loading');
+
+                if (username === CREDENTIALS.username && password === CREDENTIALS.password) {
+                    // Save session
+                    const remember = document.getElementById('remember-me').checked;
+                    const storage = remember ? localStorage : sessionStorage;
+                    storage.setItem(SESSION_KEY, JSON.stringify({ username, loginTime: Date.now() }));
+                    // Redirect to admin panel
+                    window.location.href = 'admin.html';
+                } else {
+                    errorText.textContent = 'Invalid username or password. Please try again.';
+                    errorMsg.classList.add('visible');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                    // Shake animation re-trigger
+                    errorMsg.style.animation = 'none';
+                    void errorMsg.offsetWidth;
+                    errorMsg.style.animation = '';
+                }
+            }, 900);
+        });
+
+        // Hide error on input
+        [usernameInput, passwordInput].forEach(el => {
+            el.addEventListener('input', () => errorMsg.classList.remove('visible'));
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — Innovative Petrochemicals</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo" target="_blank" rel="noopener">
+                <div class="logo-icon"></div>
+                <div class="sidebar-logo-text">
+                    <span class="sidebar-brand">INNOVATIVE</span>
+                    <span class="sidebar-brand-sub">PETROCHEMICALS</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="sidebar-admin-badge">
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <div class="admin-info">
+                <span class="admin-name">Administrator</span>
+                <span class="admin-role">Full Access</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Management</div>
+            <ul class="sidebar-nav-list">
+                <li>
+                    <a href="#" class="nav-item active" data-tab="dashboard" id="nav-dashboard">
+                        <i class="fa-solid fa-gauge-high"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item" data-tab="inquiries" id="nav-inquiries">
+                        <i class="fa-solid fa-inbox"></i>
+                        <span>Inquiries</span>
+                        <span class="nav-badge" id="inquiry-badge">0</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item" data-tab="products" id="nav-products">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        <span>Products</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item" data-tab="industries" id="nav-industries">
+                        <i class="fa-solid fa-industry"></i>
+                        <span>Industries</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="nav-section-label" style="margin-top:1.5rem;">Configuration</div>
+            <ul class="sidebar-nav-list">
+                <li>
+                    <a href="#" class="nav-item" data-tab="settings" id="nav-settings">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Site Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="nav-item" target="_blank" rel="noopener">
+                        <i class="fa-solid fa-globe"></i>
+                        <span>View Website</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.65rem;margin-left:auto;opacity:0.5;"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-item nav-logout" id="btn-logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-wrapper">
+
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="topbar-breadcrumb">
+                    <span id="topbar-title">Dashboard</span>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div class="topbar-time" id="topbar-time"></div>
+                <div class="topbar-admin">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== TAB: DASHBOARD ===== -->
+        <main class="content-area" id="tab-dashboard">
+            <div class="content-header">
+                <h1 class="content-title">Dashboard Overview</h1>
+                <p class="content-subtitle">Welcome back! Here's what's happening on your website.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon teal"><i class="fa-solid fa-inbox"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Inquiries</span>
+                        <span class="stat-value" id="dash-inquiry-count">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fa-solid fa-boxes-stacked"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Products Listed</span>
+                        <span class="stat-value" id="dash-product-count">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fa-solid fa-industry"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Industries Served</span>
+                        <span class="stat-value" id="dash-industry-count">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Last Login</span>
+                        <span class="stat-value" id="dash-last-login" style="font-size:1rem;">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Recent Inquiries -->
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3><i class="fa-solid fa-inbox"></i> Recent Inquiries</h3>
+                        <button class="dash-card-link" data-tab="inquiries">View All</button>
+                    </div>
+                    <div class="dash-inquiry-list" id="dash-inquiry-list">
+                        <div class="empty-state small"><i class="fa-solid fa-inbox"></i><p>No inquiries yet</p></div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3><i class="fa-solid fa-bolt"></i> Quick Actions</h3>
+                    </div>
+                    <div class="quick-actions-grid">
+                        <button class="quick-action-btn" data-tab="products" data-action="add">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add Product</span>
+                        </button>
+                        <button class="quick-action-btn" data-tab="industries" data-action="add">
+                            <i class="fa-solid fa-building"></i>
+                            <span>Add Industry</span>
+                        </button>
+                        <button class="quick-action-btn" data-tab="inquiries">
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                            <span>View Inquiries</span>
+                        </button>
+                        <button class="quick-action-btn" data-tab="settings">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>Site Settings</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===== TAB: INQUIRIES ===== -->
+        <main class="content-area hidden" id="tab-inquiries">
+            <div class="content-header">
+                <h1 class="content-title">Manage Inquiries</h1>
+                <p class="content-subtitle">Review and manage customer queries and contact form submissions.</p>
+            </div>
+
+            <div class="table-card">
+                <div class="table-toolbar">
+                    <div class="table-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search inquiries..." id="inquiry-search" class="table-search-input">
+                    </div>
+                    <div class="table-filters">
+                        <button class="filter-chip active" data-status="all">All</button>
+                        <button class="filter-chip" data-status="new">New</button>
+                        <button class="filter-chip" data-status="pending">Pending</button>
+                        <button class="filter-chip" data-status="resolved">Resolved</button>
+                    </div>
+                    <button class="btn-admin-secondary" id="clear-inquiries-btn">
+                        <i class="fa-solid fa-trash"></i> Clear All
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table" id="inquiries-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Email</th>
+                                <th>Resin</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inquiries-tbody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="empty-state" id="inquiries-empty">
+                    <i class="fa-solid fa-inbox"></i>
+                    <p>No inquiries received yet</p>
+                    <span>Inquiries from the main website contact form will appear here.</span>
+                </div>
+            </div>
+
+            <!-- Inquiry Detail Modal -->
+            <div class="admin-modal-overlay hidden" id="inquiry-modal">
+                <div class="admin-modal">
+                    <div class="admin-modal-header">
+                        <h3 id="inquiry-modal-title">Inquiry Details</h3>
+                        <button class="admin-modal-close" id="inquiry-modal-close"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="admin-modal-body" id="inquiry-modal-body"></div>
+                    <div class="admin-modal-footer">
+                        <button class="btn-admin-danger" id="inquiry-delete-btn">Delete</button>
+                        <div style="display:flex;gap:0.75rem;">
+                            <button class="btn-admin-secondary" id="inquiry-pending-btn">Mark Pending</button>
+                            <button class="btn-admin-primary" id="inquiry-resolve-btn">Mark Resolved</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===== TAB: PRODUCTS ===== -->
+        <main class="content-area hidden" id="tab-products">
+            <div class="content-header">
+                <h1 class="content-title">Products Manager</h1>
+                <p class="content-subtitle">Add, edit, or remove polymer products from your catalog.</p>
+            </div>
+
+            <div class="tab-section-grid">
+                <!-- Products List -->
+                <div class="section-card full-width">
+                    <div class="section-card-header">
+                        <h3><i class="fa-solid fa-boxes-stacked"></i> Product Catalog</h3>
+                        <button class="btn-admin-primary" id="show-add-product-form">
+                            <i class="fa-solid fa-plus"></i> Add New Product
+                        </button>
+                    </div>
+
+                    <!-- Add/Edit Product Form -->
+                    <div class="inline-form hidden" id="product-form-panel">
+                        <div class="inline-form-header">
+                            <h4 id="product-form-title"><i class="fa-solid fa-plus-circle"></i> Add New Product</h4>
+                            <button class="btn-icon-close" id="hide-product-form"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div class="inline-form-body">
+                            <input type="hidden" id="product-edit-id">
+                            <div class="form-row-3">
+                                <div class="form-group">
+                                    <label>Product Name *</label>
+                                    <input type="text" id="prod-name" placeholder="e.g. Polypropylene (PP)" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Category *</label>
+                                    <select id="prod-category">
+                                        <option value="polyolefins">Polyolefins (PP/PE)</option>
+                                        <option value="engineering">Engineering Plastics</option>
+                                        <option value="eco">Eco &amp; Sustainable</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Badge Label</label>
+                                    <input type="text" id="prod-badge" placeholder="e.g. Virgin, Compounded">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description *</label>
+                                <textarea id="prod-description" rows="3" placeholder="Product description..."></textarea>
+                            </div>
+                            <div class="form-row-3">
+                                <div class="form-group">
+                                    <label>MFI (g/10min)</label>
+                                    <input type="text" id="prod-mfi" placeholder="e.g. 12.0 - 25.0">
+                                </div>
+                                <div class="form-group">
+                                    <label>Density (g/cm³)</label>
+                                    <input type="text" id="prod-density" placeholder="e.g. 0.90 - 0.91">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tensile Strength</label>
+                                    <input type="text" id="prod-tensile" placeholder="e.g. 32 MPa">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Product Image</label>
+                                <div class="image-upload-zone" id="product-image-zone">
+                                    <input type="file" id="prod-image" accept="image/*" style="display:none;">
+                                    <div class="image-upload-prompt" id="product-image-prompt">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        <p>Click to upload or drag &amp; drop</p>
+                                        <span>PNG, JPG, WebP up to 5MB</span>
+                                    </div>
+                                    <img id="product-image-preview" class="image-preview hidden" alt="Product preview">
+                                </div>
+                                <input type="text" id="prod-image-url" placeholder="Or enter image URL (e.g. assets/hero_granules.png)" style="margin-top:0.5rem;">
+                            </div>
+                            <div class="form-actions">
+                                <button class="btn-admin-secondary" id="cancel-product-form">Cancel</button>
+                                <button class="btn-admin-primary" id="save-product-btn">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Product
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="admin-products-grid" id="admin-products-grid"></div>
+                    <div class="empty-state" id="products-empty" style="display:none;">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        <p>No products yet</p>
+                        <span>Add your first product using the button above.</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===== TAB: INDUSTRIES ===== -->
+        <main class="content-area hidden" id="tab-industries">
+            <div class="content-header">
+                <h1 class="content-title">Industries Manager</h1>
+                <p class="content-subtitle">Manage the "Industries We Serve" section on the main website.</p>
+            </div>
+
+            <div class="section-card full-width">
+                <div class="section-card-header">
+                    <h3><i class="fa-solid fa-industry"></i> Industries We Serve</h3>
+                    <button class="btn-admin-primary" id="show-add-industry-form">
+                        <i class="fa-solid fa-plus"></i> Add Industry
+                    </button>
+                </div>
+
+                <!-- Add/Edit Industry Form -->
+                <div class="inline-form hidden" id="industry-form-panel">
+                    <div class="inline-form-header">
+                        <h4 id="industry-form-title"><i class="fa-solid fa-plus-circle"></i> Add New Industry</h4>
+                        <button class="btn-icon-close" id="hide-industry-form"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="inline-form-body">
+                        <input type="hidden" id="industry-edit-id">
+                        <div class="form-row-2">
+                            <div class="form-group">
+                                <label>Industry Name *</label>
+                                <input type="text" id="ind-name" placeholder="e.g. Automotive">
+                            </div>
+                            <div class="form-group">
+                                <label>FontAwesome Icon Class *</label>
+                                <input type="text" id="ind-icon" placeholder="e.g. fa-solid fa-car-side">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description *</label>
+                            <textarea id="ind-description" rows="3" placeholder="Describe how this industry uses your products..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Tags (comma-separated)</label>
+                            <input type="text" id="ind-tags" placeholder="e.g. Bumpers, Dashboards, Trims">
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-admin-secondary" id="cancel-industry-form">Cancel</button>
+                            <button class="btn-admin-primary" id="save-industry-btn">
+                                <i class="fa-solid fa-floppy-disk"></i> Save Industry
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industries List -->
+                <div class="industries-admin-list" id="industries-admin-list"></div>
+                <div class="empty-state" id="industries-empty" style="display:none;">
+                    <i class="fa-solid fa-industry"></i>
+                    <p>No industries yet</p>
+                    <span>Add your first industry using the button above.</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===== TAB: SETTINGS ===== -->
+        <main class="content-area hidden" id="tab-settings">
+            <div class="content-header">
+                <h1 class="content-title">Site Settings</h1>
+                <p class="content-subtitle">Update website content and contact information.</p>
+            </div>
+
+            <div class="settings-grid">
+                <!-- Hero Section -->
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <h3><i class="fa-solid fa-house"></i> Hero Section</h3>
+                    </div>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <label>Hero Headline</label>
+                            <input type="text" id="set-hero-headline" placeholder="Precision Engineered Polymer Granules">
+                        </div>
+                        <div class="form-group">
+                            <label>Hero Subtext</label>
+                            <textarea id="set-hero-subtext" rows="3" placeholder="We supply premium-grade..."></textarea>
+                        </div>
+                        <div class="form-row-3">
+                            <div class="form-group">
+                                <label>Stat 1 Label</label>
+                                <input type="text" id="set-stat1-label" placeholder="Tons Annual Capacity">
+                            </div>
+                            <div class="form-group">
+                                <label>Stat 1 Value</label>
+                                <input type="text" id="set-stat1-value" placeholder="50K+">
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button class="btn-admin-secondary" style="height:100%;" onclick="alert('Live editing coming soon!')">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <h3><i class="fa-solid fa-address-book"></i> Contact Information</h3>
+                    </div>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <label>Company Address</label>
+                            <textarea id="set-address" rows="2" placeholder="MIDC Central, Kondivita, Andheri East, Mumbai - 400093"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Primary Email</label>
+                            <input type="email" id="set-email1" placeholder="innovativepetrochemicals@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Secondary Email</label>
+                            <input type="email" id="set-email2" placeholder="sales.innovative@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="set-phone" placeholder="+91 9167514502">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Credentials -->
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <h3><i class="fa-solid fa-key"></i> Admin Credentials</h3>
+                    </div>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" id="set-username" placeholder="admin">
+                        </div>
+                        <div class="form-group">
+                            <label>Current Password</label>
+                            <input type="password" id="set-current-pass" placeholder="Enter current password">
+                        </div>
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" id="set-new-pass" placeholder="Enter new password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" id="set-confirm-pass" placeholder="Confirm new password">
+                        </div>
+                        <button class="btn-admin-primary" id="update-credentials-btn" style="margin-top:0.5rem;">
+                            <i class="fa-solid fa-floppy-disk"></i> Update Credentials
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Save All Settings -->
+                <div class="section-card" style="grid-column:1/-1;">
+                    <div class="settings-form" style="flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+                        <div>
+                            <h4 style="font-family:var(--font-heading);margin-bottom:0.25rem;">Save All Changes</h4>
+                            <p style="color:var(--text-muted);font-size:0.85rem;">All settings are saved in browser localStorage.</p>
+                        </div>
+                        <div style="display:flex;gap:0.75rem;">
+                            <button class="btn-admin-secondary" id="reset-settings-btn">
+                                <i class="fa-solid fa-rotate-left"></i> Reset to Defaults
+                            </button>
+                            <button class="btn-admin-primary" id="save-settings-btn">
+                                <i class="fa-solid fa-floppy-disk"></i> Save Settings
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="admin-toast hidden" id="admin-toast">
+        <i class="fa-solid fa-circle-check" id="toast-icon"></i>
+        <span id="admin-toast-text">Changes saved!</span>
+    </div>
+
+    <!-- ===== CONFIRM MODAL ===== -->
+    <div class="admin-modal-overlay hidden" id="confirm-modal">
+        <div class="admin-modal small">
+            <div class="admin-modal-header">
+                <h3 id="confirm-modal-title">Confirm Action</h3>
+                <button class="admin-modal-close" id="confirm-modal-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="admin-modal-body">
+                <p id="confirm-modal-text">Are you sure?</p>
+            </div>
+            <div class="admin-modal-footer">
+                <button class="btn-admin-secondary" id="confirm-cancel-btn">Cancel</button>
+                <button class="btn-admin-danger" id="confirm-ok-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
